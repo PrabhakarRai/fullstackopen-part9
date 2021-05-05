@@ -3,7 +3,7 @@ interface PersonData {
   weight:number,
 }
 
-const calculateBmi = (data:PersonData):string => {
+export const calculateBmi = (data:PersonData):string => {
   const bmi:number = data.weight / ((data.height / 100) * (data.height / 100));
   if (bmi <= 18.5) {
     return 'Underweight';
@@ -24,6 +24,19 @@ const parseArgumentsBmi = (args:Array<string>):PersonData => {
     return {
       height: Number(args[2]),
       weight: Number(args[3]),
+    }
+  } else {
+    throw new Error('Provided values were not numbers!');
+  }
+}
+
+export const parseArgumentsBmiExpress = (args:Array<string>):PersonData => {
+  if (args.length != 2) throw new Error('Not enough arguments');
+
+  if (!isNaN(Number(args[0])) && !isNaN(Number(args[0]))) {
+    return {
+      height: Number(args[0]),
+      weight: Number(args[1]),
     }
   } else {
     throw new Error('Provided values were not numbers!');
