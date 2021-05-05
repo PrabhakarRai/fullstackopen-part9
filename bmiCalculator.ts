@@ -43,10 +43,13 @@ export const parseArgumentsBmiExpress = (args:Array<string>):PersonData => {
   }
 };
 
-try {
-  const params = parseArgumentsBmi(process.argv);
-  console.log(calculateBmi(params));
-} catch (e) {
-  console.error('Error: something bad happend, message:', (e as Error).message);
-  console.log('Usage: ts-node bmiCalculator.ts <height> <weight>');
+if (typeof require !== 'undefined' && require.main === module) {
+  try {
+    const params = parseArgumentsBmi(process.argv);
+    console.log(calculateBmi(params));
+  } catch (e) {
+    console.error('Error: something bad happend, message:', (e as Error).message);
+    console.log('Usage: ts-node bmiCalculator.ts <height> <weight>');
+  }
 }
+

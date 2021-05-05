@@ -70,12 +70,15 @@ const parseArgumentsExe = (args:Array<string>):ECInput => {
   }
 };
 
-try {
-  const params = parseArgumentsExe(process.argv);
-  console.log(exerciseCalculator(params));
-} catch (e) {
-  console.error('Error: something bad happend, message:', (e as Error).message);
-  console.log('Usage: ts-node bmiCalculator.ts <target> <daily> <daily> ...');
+if (typeof require !== 'undefined' && require.main === module) {
+  try {
+    const params = parseArgumentsExe(process.argv);
+    console.log(exerciseCalculator(params));
+  } catch (e) {
+    console.error('Error: something bad happend, message:', (e as Error).message);
+    console.log('Usage: ts-node bmiCalculator.ts <target> <daily> <daily> ...');
+  }
 }
+
 
 export default exerciseCalculator;
