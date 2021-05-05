@@ -1,0 +1,28 @@
+{
+  "name": "fullstackopen-part9",
+  "version": "1.0.0",
+  "description": "fullstackopen exercises for part 9 related to typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Passed\"",
+    "ts-node": "ts-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrabhakarRai/fullstackopen-part9.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Prabhakar Rai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PrabhakarRai/fullstackopen-part9/issues"
+  },
+  "homepage": "https://github.com/PrabhakarRai/fullstackopen-part9#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  }
+}
