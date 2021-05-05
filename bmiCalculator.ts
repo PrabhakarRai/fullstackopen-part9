@@ -24,11 +24,11 @@ const parseArgumentsBmi = (args:Array<string>):PersonData => {
     return {
       height: Number(args[2]),
       weight: Number(args[3]),
-    }
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};
 
 export const parseArgumentsBmiExpress = (args:Array<string>):PersonData => {
   if (args.length != 2) throw new Error('Not enough arguments');
@@ -37,16 +37,16 @@ export const parseArgumentsBmiExpress = (args:Array<string>):PersonData => {
     return {
       height: Number(args[0]),
       weight: Number(args[1]),
-    }
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};
 
 try {
   const params = parseArgumentsBmi(process.argv);
   console.log(calculateBmi(params));
 } catch (e) {
-  console.error('Error: something bad happend, message:', e.message);
+  console.error('Error: something bad happend, message:', e);
   console.log('Usage: ts-node bmiCalculator.ts <height> <weight>');
 }

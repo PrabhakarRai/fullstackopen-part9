@@ -1,5 +1,5 @@
 import express from 'express';
-import { calculateBmi, parseArgumentsBmiExpress } from './bmiCalculator'
+import { calculateBmi, parseArgumentsBmiExpress } from './bmiCalculator';
 const app = express();
 
 const PORT = 3001;
@@ -13,8 +13,8 @@ app.get('/bmi', (req, res) => {
     if (!req.query['height'] || !req.query['weight']) {
       throw new Error('height & weight query params are required!');
     }
-    const height:string = String(req.query['height']);
-    const weight:string = String(req.query['weight']);
+    const height = String(req.query['height']);
+    const weight = String(req.query['weight']);
     const params = parseArgumentsBmiExpress([height, weight]);
     const bmiResult = calculateBmi(params);
     res.json({
@@ -29,7 +29,7 @@ app.get('/bmi', (req, res) => {
       },
       usage: '/bmi?weight=70&height=170',
     });
-    console.error(e.message, req.query);
+    console.error(e, req.query);
   }
 });
 

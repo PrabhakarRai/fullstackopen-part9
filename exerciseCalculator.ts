@@ -6,7 +6,7 @@ interface ECResult {
   success: boolean,
   rating: 1 | 2 | 3,
   ratingDescription: string,
-};
+}
 
 interface ECInput {
   dailyExercises:Array<number>,
@@ -22,7 +22,7 @@ enum Rating {
 const Average = (numbers:Array<number>):number => {
   const sum:number = numbers.reduce((ttl, value) => ttl + value, 0);
   return sum / numbers.length;
-}
+};
 
 const exerciseCalculator = (data:ECInput): ECResult => {
   const average = Average(data.dailyExercises);
@@ -48,7 +48,7 @@ const exerciseCalculator = (data:ECInput): ECResult => {
     rating,
     ratingDescription,
   };
-}
+};
 
 const parseArgumentsExe = (args:Array<string>):ECInput => {
   if (args.length < 4) throw new Error('Not enough arguments');
@@ -64,16 +64,16 @@ const parseArgumentsExe = (args:Array<string>):ECInput => {
     return {
       dailyExercises,
       target: Number(args[2]),
-    }
+    };
   } else {
     throw new Error('Provided target value was not number!');
   }
-}
+};
 
 try {
   const params = parseArgumentsExe(process.argv);
   console.log(exerciseCalculator(params));
 } catch (e) {
-  console.error('Error: something bad happend, message:', e.message);
+  console.error('Error: something bad happend, message:', e);
   console.log('Usage: ts-node bmiCalculator.ts <target> <daily> <daily> ...');
 }
