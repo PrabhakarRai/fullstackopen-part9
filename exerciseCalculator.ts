@@ -8,6 +8,11 @@ interface ECResult {
   ratingDescription: string,
 };
 
+interface ECInput {
+  dailyExercises:Array<number>,
+  target:number,
+}
+
 enum Rating {
   Bad = 'Bad! You should push harder for achieving your target',
   Normal = 'Not too bad but could be better',
@@ -19,15 +24,15 @@ const Average = (numbers:Array<number>):number => {
   return sum / numbers.length;
 }
 
-const exerciseCalculator = (data:Array<number>, target:number): ECResult => {
-  const average = Average(data);
-  const trainedOnDays = data.filter((value) => value > 0);
+const exerciseCalculator = (data:ECInput): ECResult => {
+  const average = Average(data.dailyExercises);
+  const trainedOnDays = data.dailyExercises.filter((value) => value > 0);
   let rating:1|2|3;
   let ratingDescription:string;
-  if (average <= target * 0.8) {
+  if (average <= data.target * 0.8) {
     rating = 1;
     ratingDescription = Rating.Bad;
-  } else if (average <= target * 1.2) {
+  } else if (average <= data.target * 1.2) {
     rating = 2;
     ratingDescription = Rating.Normal;
   } else {
@@ -35,14 +40,40 @@ const exerciseCalculator = (data:Array<number>, target:number): ECResult => {
     ratingDescription = Rating.Good;
   }
   return {
-    periodLenght: data.length,
+    periodLenght: data.dailyExercises.length,
     trainingDays: trainedOnDays.length,
-    target: target,
-    success: average >= target,
+    target: data.target,
+    success: average >= data.target,
     average,
     rating,
     ratingDescription,
   };
 }
 
-console.log(exerciseCalculator([3, 0, 2, 4.5, 0, 3, 1], 2));
+const parseArgumentsExe = (args:Array<string>):ECInput => {
+  if (args.length < 4) throw new Error('Not enough arguments');
+  const dailyExercises:Array<number> = [];
+  for (let i = 3; i < args.length; i++) {
+    if (isNaN(Number(args[i]))) {
+      throw new Error('Provided daily exercises were not numbers!');
+    } else {
+      dailyExercises.push(Number(args[i]));
+    }
+  }
+  if (!isNaN(Number(args[2]))) {
+    return {
+      dailyExercises,
+      target: Number(args[2]),
+    }
+  } else {
+    throw new Error('Provided target value was not number!');
+  }
+}
+
+try {
+  const params = parseArgumentsExe(process.argv);
+  console.log(exerciseCalculator(params));
+} catch (e) {
+  console.error('Error: something bad happend, message:', e.message);
+  console.log('Usage: ts-node bmiCalculator.ts <target> <daily> <daily> ...');
+}
