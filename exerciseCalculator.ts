@@ -1,4 +1,4 @@
-interface ECResult {
+export interface ECResult {
   periodLenght: number,
   trainingDays: number,
   target: number,
@@ -8,7 +8,7 @@ interface ECResult {
   ratingDescription: string,
 }
 
-interface ECInput {
+export interface ECInput {
   dailyExercises:Array<number>,
   target:number,
 }
@@ -74,6 +74,8 @@ try {
   const params = parseArgumentsExe(process.argv);
   console.log(exerciseCalculator(params));
 } catch (e) {
-  console.error('Error: something bad happend, message:', e);
+  console.error('Error: something bad happend, message:', (e as Error).message);
   console.log('Usage: ts-node bmiCalculator.ts <target> <daily> <daily> ...');
 }
+
+export default exerciseCalculator;

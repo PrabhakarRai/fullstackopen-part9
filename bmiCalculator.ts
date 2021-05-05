@@ -47,6 +47,6 @@ try {
   const params = parseArgumentsBmi(process.argv);
   console.log(calculateBmi(params));
 } catch (e) {
-  console.error('Error: something bad happend, message:', e);
+  console.error('Error: something bad happend, message:', (e as Error).message);
   console.log('Usage: ts-node bmiCalculator.ts <height> <weight>');
 }
