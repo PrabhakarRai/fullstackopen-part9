@@ -82,6 +82,6 @@ const diagnosesEntries:Array<DiagnosesEntry> = [
     "code": "J12.82",
     "name": "Pneumonia due to coronavirus disease"
   }
-]
+];
 
 export default diagnosesEntries;

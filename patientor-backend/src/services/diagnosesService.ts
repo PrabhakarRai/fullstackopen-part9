@@ -11,5 +11,5 @@ const addEntry = () => {
 
 export default {
   getEntries,
-  addEntry
+  addEntry,
 };
