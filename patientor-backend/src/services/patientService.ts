@@ -21,7 +21,7 @@ const addEntry = (data:PatientEntry):Patient => {
   const patient:Patient = {
     ...data,
     id: uuid(),
-  }
+  };
   patientsInfo.push(patient);
   return patient;
 };
